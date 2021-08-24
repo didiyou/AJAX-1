@@ -1,9 +1,10 @@
 console.log("我是main.js")
 
 let n = 1
-getPackedSettings.onclick = ()=>{
+getPage.onclick = ()=>{
     const request = new XMLHttpRequest()
-    request.open('GET','/page${n+1}')
+    console.log('n当前值为：${n}')
+    request.open('GET',`/page${n+1}`)
     request.onreadystatechange = ()=>{
         if(request.readyState === 4 && request.status === 200)
         {
@@ -26,13 +27,14 @@ getJSON.onclick = ()=>{
         if(request.readyState === 4 && request.status === 200)
         {
             const object = JSON.parse(request.response)
+            console.log(object)
             myName.textContent = object.name
         }
     }
     request.send()
 }
 
-getMaxListeners.onclick = ()=>{
+getXML.onclick = ()=>{
     const request =new XMLHttpRequest()
     request.open('GET','/4.xml')
     request.onreadystatechange =()=>{
@@ -40,6 +42,7 @@ getMaxListeners.onclick = ()=>{
         {
             const dom = request.responseXML
             const text = dom.getElementsByTagName('warning')[0].textContent
+            console.log(text)
         }
     }
     request.send()
@@ -60,6 +63,7 @@ getHTML.onclick = ()=>{
 
 getJS.onclick = ()=>{
     const request = new XMLHttpRequest()
+    request.open('GET','/2.js')
     request.onload = ()=>{
         const script = document.createElement('script')
         script.innerHTML = request.response
@@ -72,7 +76,7 @@ getJS.onclick = ()=>{
 }
 
 
-getMatchedCSSRules.onclick =()=>{
+getCSS.onclick =()=>{
 const request = new XMLHttpRequest()
 request.open('GET','/style.css')
 request.onreadystatechange = ()=>{
